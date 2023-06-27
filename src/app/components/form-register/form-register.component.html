@@ -1,1 +1,30 @@
-<p>form-register works!</p>
+<form class="container px-5 mt-5" [formGroup]="registerForm" autocomplete="off">
+    <div class="mb-3">
+        <label for="registerUsername" class="form-label">Usuario</label>
+        <input type="text" class="form-control" id="registerUsername" aria-describedby="emailHelp" name="username" formControlName="username">
+        <div id="usernameHelp" class="form-text" *ngIf="registerForm.controls['username'].errors && registerForm.controls['username'].dirty">
+            <p *ngIf="registerForm.controls['username'].errors['required']">*Campo requerido</p>
+            <p *ngIf="registerForm.controls['username'].errors['minlength']">*Longuitud mínima 5 caracteres</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="registerPassword" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="registerPassword" name="password" formControlName="password">
+        <div id="passwordHelp" class="form-text" *ngIf="registerForm.controls['password'].errors && registerForm.controls['password'].dirty">
+            <p *ngIf="registerForm.controls['password'].errors['required']">*Campo requerido</p>
+            <p *ngIf="registerForm.controls['password'].errors['pattern']">*Debe tener entre 8 y 20 caracteres, al menos una mayúscula, una minúscula y un número</p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="registerEmail" class="form-label">Mail</label>
+        <input type="email" class="form-control" id="registerEmail" name="email" formControlName="email">
+        <div id="emailHelp" class="form-text" *ngIf="registerForm.controls['email'].errors && registerForm.controls['email'].dirty">
+            <p *ngIf="registerForm.controls['email'].errors['required']">*Campo requerido</p>
+            <p *ngIf="registerForm.controls['email'].errors['email']">*Debe ser una dirección válida</p>
+        </div>
+    </div>
+    <div class="row justify-content-around mt-5">
+        <button type="submit" class="col-5 btn btn-danger " [disabled]="registerForm.invalid" (click)="register()">Registrase</button>
+        <button  class="col-5 btn btn-outline-danger" routerLink="/login">Cancelar</button>
+    </div>
+</form>

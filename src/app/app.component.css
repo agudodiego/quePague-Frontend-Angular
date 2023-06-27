@@ -1,4 +1,5 @@
+
 .banner {
     color: whitesmoke;
-    background-color: #000;
+    background-color: var(--color-3);
 }

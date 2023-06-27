@@ -1,7 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --color-1: #000000;
+    --color-2: #3D0000;
+    --color-3: #950101;
+    --color-4: #FF0000;
+}
+
 * {
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
+    box-sizing: border-box;  
+}
+
+body {
+    background-color: var(--color-1);
+}
+
+label {
+    color: whitesmoke;
+}
+
+.form-text {
+    color: var(--color-4);
 }
 

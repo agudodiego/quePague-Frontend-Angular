@@ -9,6 +9,7 @@ import { RegisterComponent } from './views/register/register.component';
 import { HomeComponent } from './views/home/home.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FormRegisterComponent } from './components/form-register/form-register.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
