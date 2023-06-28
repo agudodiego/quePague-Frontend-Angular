@@ -1,0 +1,14 @@
+.userBanner {
+    background-color: var(--color-3);
+    color: whitesmoke;
+    margin: 0;
+}
+
+i {
+    cursor: pointer;
+}
+
+.month {
+    font-size: 2em;
+    color: var(--color-4);
+}

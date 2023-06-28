@@ -1,1 +1,12 @@
-<p>home works!</p>
+<div class="row p-1 mb-1 d-flex justify-content-around userBanner">
+    <h4 class="col-10 fs-5 m-0">usuario: {{username | lowercase}}</h4>
+    <i class="col-2 bi bi-box-arrow-right text-end" 
+        style="font-size: 1.3rem; color: whitesmoke;"
+        (click)="logout()">
+    </i>        
+</div>
+
+<div class="container">
+    <h2 class="col text-center month">{{actualMonth | date: 'MMMM'}}</h2>
+    <app-payment-input></app-payment-input>
+</div>

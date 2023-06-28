@@ -10,6 +10,7 @@ import { HomeComponent } from './views/home/home.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { FormRegisterComponent } from './components/form-register/form-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PaymentInputComponent } from './components/payment-input/payment-input.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     RegisterComponent,
     HomeComponent,
     FormLoginComponent,
-    FormRegisterComponent
+    FormRegisterComponent,
+    PaymentInputComponent
   ],
   imports: [
     BrowserModule,
