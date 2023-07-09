@@ -1,12 +1,49 @@
-<div class="row p-1 mb-1 d-flex justify-content-around userBanner">
-    <h4 class="col-10 fs-5 m-0">usuario: {{username | lowercase}}</h4>
-    <i class="col-2 bi bi-box-arrow-right text-end" 
-        style="font-size: 1.3rem; color: whitesmoke;"
-        (click)="logout()">
-    </i>        
-</div>
+<app-user-banner [username]="username"></app-user-banner>
 
 <div class="container">
-    <h2 class="col text-center month">{{actualMonth | date: 'MMMM'}}</h2>
+    <div class="row px-3">
+        <h2 class="col text-left month my-3">            
+            <i class="bi bi-calendar3" 
+            style="font-size: 2rem; color: whitesmoke;">
+            </i>  
+            {{actualMonth | date: 'MMMM'}}
+        </h2>
+        <i class="col-2 m-0 p-0 bi bi-printer d-flex justify-content-center align-items-center"
+            style="font-size: 2rem; color: whitesmoke;"
+            (click)="print()">            
+        </i>
+        <i *ngIf="showAdminButton"
+            class="col-2 m-0 p-0 bi bi-list-check d-flex justify-content-center align-items-center"
+            style="font-size: 2rem; color: whitesmoke;"
+            (click)="goToUsersList()">
+        </i>
+    </div>    
+
     <app-payment-input></app-payment-input>
+
+    <div *ngIf="showLoader; else paymentList">Loading...</div>
+    
+    <ng-template #paymentList>
+        <div *ngFor="let payment of loggedUser.payments" class="container my-2 payment-card" >
+            <div class="row d-flex p-1 align-items-center">
+
+                <!-- <div class="col-1 m-0 form-check form-switch switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                </div> -->
+
+                <div class="col">
+                    <h3 class="m-0">{{payment.title}}</h3>
+                    <p class="m-0 mx-3">{{payment.payDate ? payment.payDate : "Sin pagar"}}</p>
+                </div>
+                <i class="col-2 text-end p-0 bi bi-currency-dollar"
+                    style="font-size: 2.1rem; color: green;"
+                    (click)="pay(payment.paymentId)">
+                </i>
+                <i class="col-2 text-center p-0 bi bi-info-circle"
+                    style="font-size: 2.1rem; color: whitesmoke;"
+                    (click)="editInfo(payment.paymentId)">
+                </i>
+            </div>
+        </div>
+    </ng-template>
 </div>

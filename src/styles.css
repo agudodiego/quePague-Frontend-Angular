@@ -14,8 +14,13 @@
     box-sizing: border-box;  
 }
 
+i {
+    cursor: pointer;
+}
+
 body {
     background-color: var(--color-1);
+    /* background-color: #fff; */
 }
 
 label {

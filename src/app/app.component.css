@@ -1,5 +1,9 @@
 
 .banner {
     color: whitesmoke;
-    background-color: var(--color-3);
+    background-color: var(--color-3);    
+}
+
+h1 {
+    filter: drop-shadow(0 0 10px black);
 }

@@ -9,7 +9,20 @@
     </div>
     <div class="mb-3">
         <label for="registerPassword" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="registerPassword" name="password" formControlName="password">
+        <div class="input-group mb-3">
+            <input type="{{passwordVisible?'text':'password'}}" class="form-control" id="InputPassword" name="password" formControlName="password">
+            <button type="button" class="btn btn-outline-secondary" (click)="showPass()">
+                <i *ngIf="!passwordVisible; else closedEye"
+                    class="bi bi-eye-fill" 
+                    style="font-size: 1.3rem; color: whitesmoke;">
+                </i> 
+                <ng-template #closedEye>
+                    <i class="bi bi-eye-slash-fill" 
+                    style="font-size: 1.3rem; color: whitesmoke;">
+                </i>
+                </ng-template>
+            </button>            
+        </div>
         <div id="passwordHelp" class="form-text" *ngIf="registerForm.controls['password'].errors && registerForm.controls['password'].dirty">
             <p *ngIf="registerForm.controls['password'].errors['required']">*Campo requerido</p>
             <p *ngIf="registerForm.controls['password'].errors['pattern']">*Debe tener entre 8 y 20 caracteres, al menos una mayúscula, una minúscula y un número</p>

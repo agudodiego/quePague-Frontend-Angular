@@ -1,14 +1,15 @@
-.userBanner {
-    background-color: var(--color-3);
-    color: whitesmoke;
-    margin: 0;
-}
-
-i {
-    cursor: pointer;
-}
-
 .month {
     font-size: 2em;
     color: var(--color-4);
+}
+
+.payment-card {
+    color: whitesmoke;
+    background-color: #164B60;
+    border-radius: 10px 50px 50px 10px;
+    border: solid 2px #4FC0D0;
+}
+
+.switch {
+    rotate: 90deg;
 }

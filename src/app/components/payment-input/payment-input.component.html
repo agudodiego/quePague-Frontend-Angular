@@ -1,6 +1,6 @@
 <div class="row px-3">
     <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Agregar Pago" aria-label="Recipient's username" aria-describedby="button-addon2">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Agregar</button>
+        <input type="text" class="form-control" placeholder="Nombre del Pago" aria-label="Agregar Pago" [(ngModel)]="paymentName">
+        <button type="button" class="btn btn-outline-secondary" (click)="addPayment()">Agregar</button>
     </div>
 </div>

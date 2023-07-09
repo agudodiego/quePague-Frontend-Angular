@@ -1,23 +1,31 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginRequest } from '../model/LoginRequest.class';
+import { BASE_URL } from '../util/constants';
+import { catchError } from 'rxjs';
+import { handlerException } from '../util/handlerException';
+import { ApiResponse } from '../model/ApiResponse.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  BASE_URL: string = "http://localhost:8080/API/auth"
+  private apiUrl = `${BASE_URL}/auth`;
 
   constructor(private http: HttpClient) { }
 
   register (body: any): any {
-    return this.http.post(this.BASE_URL+'/register', body);
+    return this.http.post(this.apiUrl+'/register', body)
+            .pipe(catchError(handlerException));
   }
 
-  login (body: LoginRequest): any {
-    return this.http.post(this.BASE_URL+'/login', body);
+  login (body: LoginRequest) {
+    return this.http.post<ApiResponse>(this.apiUrl+'/login', body)
+            .pipe(catchError(handlerException));
   }
+
+  // ------------------ Metodos para el Token -----------------------
 
   extractRole() {
     const token: string | null = sessionStorage.getItem('token');

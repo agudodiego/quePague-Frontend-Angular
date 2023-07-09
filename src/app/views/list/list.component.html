@@ -1,0 +1,14 @@
+<div class="row px-3">
+    <h2 class="col text-left listTitle my-3">Listado de Usuarios</h2>
+    <i class="col-2 m-0 p-0 bi bi-house d-flex justify-content-center align-items-center"
+        style="font-size: 2rem; color: whitesmoke;"
+        (click)="goHome()">            
+    </i>
+</div>
+
+<div *ngIf="showLoader; else usersTable">Loading...</div>
+
+<ng-template #usersTable>
+    <app-users-list [usersList]="usersList"></app-users-list>
+</ng-template>
+

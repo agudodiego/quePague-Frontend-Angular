@@ -12,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class FormRegisterComponent {
 
 registerForm: FormGroup;
+public passwordVisible: boolean = false;
 
 constructor(private construct: FormBuilder, private authService: AuthService, private router: Router) {
   this.registerForm = construct.group({
@@ -38,10 +39,12 @@ register() {
       error: (err: any) => {
         console.log(err);
       }
-    });
+    }); 
+  
+}
 
-  
-  
+showPass() {
+  this.passwordVisible = !this.passwordVisible;
 }
 
 }
