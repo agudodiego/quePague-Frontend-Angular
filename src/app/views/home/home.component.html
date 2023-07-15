@@ -3,8 +3,9 @@
 <div class="container">
     <div class="row px-3">
         <h2 class="col text-left month my-3">            
-            <i class="bi bi-calendar3" 
-            style="font-size: 2rem; color: whitesmoke;">
+            <i class="bi bi-arrow-clockwise" 
+            style="font-size: 2rem; color: whitesmoke;"
+            (click)="resetMonth()">
             </i>  
             {{actualMonth | date: 'MMMM'}}
         </h2>
@@ -24,26 +25,66 @@
     <div *ngIf="showLoader; else paymentList">Loading...</div>
     
     <ng-template #paymentList>
-        <div *ngFor="let payment of loggedUser.payments" class="container my-2 payment-card" >
-            <div class="row d-flex p-1 align-items-center">
-
-                <!-- <div class="col-1 m-0 form-check form-switch switch">
-                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                </div> -->
+        <div *ngFor="let payment of loggedUser.payments" class="container my-2" >
+            <div [ngClass]="{'opacity': payment.alreadyPaid}" class="row d-flex p-1 align-items-center payment-card">
 
                 <div class="col">
                     <h3 class="m-0">{{payment.title}}</h3>
-                    <p class="m-0 mx-3">{{payment.payDate ? payment.payDate : "Sin pagar"}}</p>
+                    <p class="m-0 mx-3">{{payment.payDate ? payment.payDate : ""}}</p>
                 </div>
                 <i class="col-2 text-end p-0 bi bi-currency-dollar"
                     style="font-size: 2.1rem; color: green;"
-                    (click)="pay(payment.paymentId)">
+                    (click)="pay(payment.paymentId, payment.alreadyPaid)">
                 </i>
                 <i class="col-2 text-center p-0 bi bi-info-circle"
                     style="font-size: 2.1rem; color: whitesmoke;"
-                    (click)="editInfo(payment.paymentId)">
+                    (click)="openModal(payment)">
                 </i>
+
             </div>
         </div>
     </ng-template>
+</div>
+
+<!-- MODAL -->
+
+<div class="modal my-5" id="editModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content primary border border-light">
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-light">Modificar Pago</h5>
+        </div>
+
+        <div class="modal-body bg-dark">
+
+            <div class="mb-3 form-check">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="formPayed" id="payed">
+                <label class="form-check-label text-light" for="payed">
+                    Pagado?
+                </label>
+            </div>
+
+            <div class="mb-3">
+                <label for="title" class="form-label text-light">* Nombre del Pago</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="title" [(ngModel)]="formTitle"> 
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="note" class="form-label text-light">Nota</label>
+                <div class="input-group">
+                    <textarea class="form-control" id="note" style="height: 100px" [(ngModel)]="formNote"></textarea>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="modal-footer bg-dark">
+          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+          <button type="button" class="btn btn-danger" (click)="delete()">Borrar</button>
+          <button type="button" class="btn btn-success" [disabled]="formTitle == '' || formTitle == null" (click)="editInfo()">Modificar</button>
+        </div>
+      </div>
+    </div>
 </div>

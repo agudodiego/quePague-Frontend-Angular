@@ -13,3 +13,11 @@
 .switch {
     rotate: 90deg;
 }
+
+.opacity {
+    opacity: 0.5;
+}
+
+/* .m {
+    background-color: #555;
+} */

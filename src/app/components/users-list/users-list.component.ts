@@ -26,11 +26,9 @@ export class UsersListComponent {
   }
 
   delete(username: string) {
-    console.log('borrar usuario: ', username);
     this.userService.deleteUser(username)
           .subscribe({
             next: (resp: ApiResponse)=> {
-              console.log(resp.data);
               const newList = this.usersList.filter((user)=> user.username != username);
               this.usersList = newList;
             },
