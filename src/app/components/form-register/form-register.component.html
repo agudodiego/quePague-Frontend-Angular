@@ -41,3 +41,7 @@
         <button  class="col-5 btn btn-outline-danger" routerLink="/login">Cancelar</button>
     </div>
 </form>
+
+<app-error-alert [showError]="showError" [errorMsg]="errorMsg" ></app-error-alert>
+
+<app-success-alert [showSuccess]="showSuccess" [successMsg]="successMsg"></app-success-alert>

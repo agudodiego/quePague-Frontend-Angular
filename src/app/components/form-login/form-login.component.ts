@@ -14,6 +14,10 @@ export class FormLoginComponent {
 
   loginForm: FormGroup;
   public passwordVisible: boolean = false;
+  showError: boolean = false;
+  errorMsg: string = '';
+  showSuccess: boolean = false;
+  successMsg: string = '';
 
   constructor(private construct: FormBuilder, private authService: AuthService, private router: Router, private userService: UserService) {
     this.loginForm = construct.group({
@@ -35,7 +39,12 @@ export class FormLoginComponent {
           this.router.navigate(['/home']);
         },
         error: (err: any) => {
-          console.log(err);
+          this.errorMsg = err.message.split(". ")[1];
+          this.showError = true;
+          setTimeout(() => {
+            this.showError = false;
+            this.loginForm.reset();
+          }, 2000);
         }
       });
 

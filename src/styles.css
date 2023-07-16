@@ -31,3 +31,10 @@ label {
     color: var(--color-4);
 }
 
+.alertDiv {
+    width: 95%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+

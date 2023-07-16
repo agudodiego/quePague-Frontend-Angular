@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ApiResponse } from 'src/app/model/ApiResponse.interface';
 import { RegisterRequest } from 'src/app/model/RegisterRequest.class';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -13,6 +14,10 @@ export class FormRegisterComponent {
 
 registerForm: FormGroup;
 public passwordVisible: boolean = false;
+showError: boolean = false;
+errorMsg: string = '';
+showSuccess: boolean = false;
+successMsg: string = '';
 
 constructor(private construct: FormBuilder, private authService: AuthService, private router: Router) {
   this.registerForm = construct.group({
@@ -32,12 +37,22 @@ register() {
 
   this.authService.register(newUser)
     .subscribe({
-      next: (resp:any) => {
-        console.log('registro exitoso')
-        this.router.navigate(['/login']);
+      next: (resp: ApiResponse) => {
+        this.successMsg = resp.message;
+        this.showSuccess = true;
+        setTimeout(() => {
+          this.showSuccess = false;
+          this.registerForm.reset();
+          this.router.navigate(['/login']);
+        }, 2000);        
       },
       error: (err: any) => {
-        console.log(err);
+        this.errorMsg = err.message;
+        this.showError = true;
+        setTimeout(() => {
+          this.showError = false;
+          this.registerForm.reset();
+        }, 2000);
       }
     }); 
   

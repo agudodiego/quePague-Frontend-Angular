@@ -18,6 +18,8 @@ import { CustomInterceptor } from './services/custom.interceptor';
 import { UserBannerComponent } from './components/user-banner/user-banner.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { ListComponent } from './views/list/list.component';
+import { ErrorAlertComponent } from './components/alerts/error-alert/error-alert.component';
+import { SuccessAlertComponent } from './components/alerts/success-alert/success-alert.component';
 
 registerLocaleData(localeEs, 'es');
 
@@ -32,7 +34,9 @@ registerLocaleData(localeEs, 'es');
     PaymentInputComponent,
     UserBannerComponent,
     UsersListComponent,
-    ListComponent
+    ListComponent,
+    ErrorAlertComponent,
+    SuccessAlertComponent
   ],
   imports: [
     BrowserModule,
