@@ -22,7 +22,12 @@
 
     <app-payment-input></app-payment-input>
 
-    <div *ngIf="showLoader; else paymentList">Loading...</div>
+    <div *ngIf="showLoader; else paymentList" 
+          class="spinner-border text-danger" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+
+    <!-- <div *ngIf="showLoader; else paymentList">Loading...</div> -->
     
     <ng-template #paymentList>
         <div *ngFor="let payment of loggedUser.payments" class="container my-2" >

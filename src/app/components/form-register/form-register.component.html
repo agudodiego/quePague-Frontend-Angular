@@ -1,3 +1,7 @@
+<app-error-alert class="col-12 position-absolute" [showError]="showError" [errorMsg]="errorMsg" ></app-error-alert>
+
+<app-success-alert class="col-12 position-absolute" [showSuccess]="showSuccess" [successMsg]="successMsg"></app-success-alert>
+
 <form class="container px-5 mt-5" [formGroup]="registerForm" autocomplete="off">
     <div class="mb-3">
         <label for="registerUsername" class="form-label">Usuario</label>
@@ -14,11 +18,11 @@
             <button type="button" class="btn btn-outline-secondary" (click)="showPass()">
                 <i *ngIf="!passwordVisible; else closedEye"
                     class="bi bi-eye-fill" 
-                    style="font-size: 1.3rem; color: whitesmoke;">
+                    style="font-size: 1.1rem; color: whitesmoke;">
                 </i> 
                 <ng-template #closedEye>
                     <i class="bi bi-eye-slash-fill" 
-                    style="font-size: 1.3rem; color: whitesmoke;">
+                    style="font-size: 1.1rem; color: whitesmoke;">
                 </i>
                 </ng-template>
             </button>            
@@ -42,6 +46,4 @@
     </div>
 </form>
 
-<app-error-alert [showError]="showError" [errorMsg]="errorMsg" ></app-error-alert>
 
-<app-success-alert [showSuccess]="showSuccess" [successMsg]="successMsg"></app-success-alert>
