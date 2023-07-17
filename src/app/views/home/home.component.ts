@@ -54,11 +54,9 @@ export class HomeComponent  {
   } 
 
   resetMonth() {
-    console.log('resetear mes');
     this.paymentService.resetMonth(this.username)
           .subscribe({
             next: (resp: ApiResponse)=> {
-              console.log(resp.message);
               const updatedUser = this.userService.loggedUser;
               updatedUser.payments.forEach((p)=> {
                 p.alreadyPaid = false;
