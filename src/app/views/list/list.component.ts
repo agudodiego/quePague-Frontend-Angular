@@ -13,6 +13,8 @@ export class ListComponent {
 
   public showLoader: boolean = true;
   public usersList: BasicPersonResponse[] = [];
+  showConfirmationAlert: boolean = false;
+  userToDelete!: string;
 
   constructor(private router: Router, private userService: UserService) {}
 
@@ -32,6 +34,33 @@ export class ListComponent {
 
   goHome() {
     this.router.navigate(['/home']);
+  };
+
+  cancel(cancel: boolean) {
+    this.showConfirmationAlert = cancel;
+  }
+
+  showConfModal(username: string) {
+    this.showConfirmationAlert = true;
+    this.userToDelete = username;
+    console.log(this.userToDelete);
+  }
+
+  delete(confirmation: boolean) {
+    if (confirmation) {
+      this.userService.deleteUser(this.userToDelete)
+      .subscribe({
+        next: (resp: ApiResponse)=> {
+          const newList = this.usersList.filter((user)=> user.username != this.userToDelete);
+          this.usersList = newList;
+          this.showConfirmationAlert = false;
+        },
+        error: (error)=> {
+          console.error(error);
+        }
+      });
+    }
+    
   }
 
 }

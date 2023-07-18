@@ -1,0 +1,10 @@
+<div *ngIf="showConfirmationAlert" class="alert alert-warning d-flex flex-column align-items-center" role="alert">
+    <i class="bi bi-exclamation-triangle-fill flex-shrink-0 fs-3"></i>
+    <div class="mb-3">
+      Estas seguro?
+    </div>
+    <div class="">
+        <button class="col mx-1 btn btn-secondary" (click)="cancel()">Cancelar</button>
+        <button class="col mx-1 btn btn-success" (click)="confirmDeletion()">Borrar</button>
+    </div>
+</div>

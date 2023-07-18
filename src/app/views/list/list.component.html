@@ -11,7 +11,11 @@
         <span class="visually-hidden">Loading...</span>
 </div>
 
+<app-confirmation-alert [showConfirmationAlert]="showConfirmationAlert" 
+    (cancelEvent)="cancel($event)" 
+    (confirmDeletionEvent)="delete($event)"></app-confirmation-alert>
+
 <ng-template #usersTable>
-    <app-users-list [usersList]="usersList"></app-users-list>
+    <app-users-list [usersList]="usersList" (deleteEvent)="showConfModal($event)"></app-users-list>
 </ng-template>
 

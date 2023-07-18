@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiResponse } from 'src/app/model/ApiResponse.interface';
 import { BasicPersonResponse } from 'src/app/model/BasicPersonResponse.class';
@@ -15,6 +15,9 @@ export class UsersListComponent {
   @Input()
   usersList: BasicPersonResponse[] = [];
 
+  @Output()
+  deleteEvent = new EventEmitter<string>();
+
   public loggedUser: string = '';
 
   constructor(private authService: AuthService,
@@ -26,15 +29,6 @@ export class UsersListComponent {
   }
 
   delete(username: string) {
-    this.userService.deleteUser(username)
-          .subscribe({
-            next: (resp: ApiResponse)=> {
-              const newList = this.usersList.filter((user)=> user.username != username);
-              this.usersList = newList;
-            },
-            error: (error)=> {
-              console.error(error);
-            }
-          })
+    this.deleteEvent.emit(username);
   }
 }
