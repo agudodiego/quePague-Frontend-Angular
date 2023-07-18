@@ -39,7 +39,7 @@ export class FormLoginComponent {
           this.router.navigate(['/home']);
         },
         error: (err: any) => {
-          this.errorMsg = err.message.split(". ")[1];
+          this.errorMsg = err.message;
           this.showError = true;
           setTimeout(() => {
             this.showError = false;
