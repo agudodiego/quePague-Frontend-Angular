@@ -2,7 +2,7 @@
 
 <app-success-alert class="col-12 position-absolute" [showSuccess]="showSuccess" [successMsg]="successMsg"></app-success-alert>
 
-<form class="container px-5 mt-5" [formGroup]="registerForm" autocomplete="off">
+<form class="container px-5 mt-5 customWidth" [formGroup]="registerForm" autocomplete="off">
     <div class="mb-3">
         <label for="registerUsername" class="form-label">Usuario</label>
         <input type="text" class="form-control" id="registerUsername" aria-describedby="emailHelp" name="username" formControlName="username">

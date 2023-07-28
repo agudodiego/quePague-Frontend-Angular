@@ -40,3 +40,13 @@ label {
     margin: auto;
 }
 
+@media screen and (min-width: 768px) {
+
+    .customWidth {
+        width: 700px;
+    }
+
+  }
+
+
+
