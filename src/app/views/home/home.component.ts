@@ -27,6 +27,9 @@ export class HomeComponent  {
   public formPayed?: boolean;
   public formNote?: string;
 
+  showError: boolean = false;
+  errorMsg: string = '';
+
   constructor(private authService: AuthService, 
               private router: Router,
               private userService: UserService,
@@ -82,6 +85,7 @@ export class HomeComponent  {
   openModal(payment: Payment) {
     const editionModal = document.getElementById('editModal');
     editionModal!.style.display = 'block';
+
     this.paymentToModify = payment;
     this.formPayed = payment.alreadyPaid;
     this.formTitle = payment.title;
@@ -107,13 +111,18 @@ export class HomeComponent  {
           .subscribe({
             next: (resp: ApiResponse)=> {
               this.localArrayUpdate(resp);
+              this.closeModal();
             },
-            error: (error)=> {
-              console.error(error);
+            error: (err)=> {
+              console.error(err);
+              this.errorMsg = err.message;
+              this.showError = true;
+              setTimeout(() => {
+                this.showError = false;
+                this.closeModal();
+              }, 2000);
             }
-          });
-
-    this.closeModal();
+          });    
   }
 
   pay(id: number, alreadyPaid: boolean) {
@@ -123,8 +132,13 @@ export class HomeComponent  {
             next: (resp: ApiResponse)=> {
               this.localArrayUpdate(resp);
             },
-            error: (error)=> {
-              console.error(error);
+            error: (err)=> {
+              console.error(err);
+              this.errorMsg = err.message;
+              this.showError = true;
+              setTimeout(() => {
+                this.showError = false;
+              }, 2000);
             }
           });
   }
@@ -137,13 +151,18 @@ export class HomeComponent  {
               const newList = this.userService.loggedUser.payments.filter((p)=> p.paymentId !== this.paymentToModify!.paymentId);
               const user = new PersonResponse(this.username, newList);
               this.userService.setLoggedUser(user);
+              this.closeModal();
             },
-            error: (error)=> {
-              console.error(error);
+            error: (err)=> {
+              console.error(err);
+              this.errorMsg = err.message;
+              this.showError = true;
+              setTimeout(() => {
+                this.showError = false;
+                this.closeModal();
+              }, 2000);
             }
-          });
-          
-    this.closeModal();
+          });      
   }
 
   formatDate(): string | null {
