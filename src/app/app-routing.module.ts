@@ -11,7 +11,8 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'registro', component: RegisterComponent},
   {path: 'home', component: HomeComponent, canActivate: [ authGuardFn ]},
-  {path: 'lista', component: ListComponent, canActivate: [ authGuardFn ]}
+  {path: 'lista', component: ListComponent, canActivate: [ authGuardFn ]},
+  {path: '**', redirectTo: 'login'}
 ];
 
 @NgModule({
