@@ -102,7 +102,7 @@ export class HomeComponent  {
     const paymentToEdit = new Payment(
       this.paymentToModify!.paymentId,
       this.formTitle!,
-      this.formatDate(),
+      this.formatDate(this.paymentToModify!.payDate),
       this.formPayed!,
       this.formNote!
     );
@@ -165,13 +165,17 @@ export class HomeComponent  {
           });      
   }
 
-  formatDate(): string | null {
+  formatDate(date: string | null): string | null {
+    // if (date !== null) return date;
+
     const datePipe = new DatePipe('en-US');
     const today = new Date();
-    if (this.formPayed) {
-      return datePipe.transform(today,'yyyy-MM-dd') 
+    if (!this.formPayed) {
+      return null;      
+    } else if (date !== null) {
+      return date;
     } else {
-      return null;
+      return datePipe.transform(today,'yyyy-MM-dd'); 
     }
   }
 
