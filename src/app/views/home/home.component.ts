@@ -8,6 +8,10 @@ import { PersonResponse } from 'src/app/model/PersonResponse.class';
 import { AuthService } from 'src/app/services/auth.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { UserService } from 'src/app/services/user.service';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-home',
@@ -76,6 +80,38 @@ export class HomeComponent  {
   print() {
     console.log('imprimir listado de pagos');
     console.log('todavia no implementado');
+
+    const pdfDefinition: any = {
+      content: this.paymentsListMaker(),
+      styles: {
+        header: {
+          fontSize: 15,
+          bold: true,
+          marginBottom: 6
+        },
+        regularFont: {
+          marginBottom: 3
+        }
+      }
+    }
+
+    const pdf = pdfMake.createPdf(pdfDefinition);
+    // pdf.open();
+    pdf.download();
+  }
+
+  paymentsListMaker() {
+    const paymentArray: Object[] = [];
+
+    let paymentString = {text: `PAGOS DEL MES ${this.actualMonth.getMonth()+1}`, style: 'header'};
+    paymentArray.push(paymentString);
+
+    this.loggedUser.payments.forEach( payment => {
+      paymentString = { text: `${payment.title} - ${payment.payDate !== null ? payment.payDate : 'Sin pagar'} `, style: 'regularFont'};
+      paymentArray.push(paymentString);
+    });
+
+    return paymentArray;
   }
 
   goToUsersList() {

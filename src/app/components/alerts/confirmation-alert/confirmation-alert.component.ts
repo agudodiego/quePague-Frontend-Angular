@@ -14,14 +14,14 @@ export class ConfirmationAlertComponent {
   cancelEvent = new EventEmitter<boolean>();
 
   @Output()
-  confirmDeletionEvent = new EventEmitter<boolean>();
+  confirmEvent = new EventEmitter<boolean>();
 
   cancel() {
     this.cancelEvent.emit(false);
   }
 
-  confirmDeletion() {
-    this.confirmDeletionEvent.emit(true);
+  confirm() {
+    this.confirmEvent.emit(true);
   }
 
 }

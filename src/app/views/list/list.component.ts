@@ -43,7 +43,6 @@ export class ListComponent {
   showConfModal(username: string) {
     this.showConfirmationAlert = true;
     this.userToDelete = username;
-    console.log(this.userToDelete);
   }
 
   delete(confirmation: boolean) {
