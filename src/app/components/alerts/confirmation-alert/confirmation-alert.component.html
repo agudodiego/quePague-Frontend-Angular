@@ -1,10 +1,10 @@
-<div *ngIf="showConfirmationAlert" class="container alert alert-warning d-flex flex-column align-items-center customWidth" role="alert">
+<div *ngIf="showConfirmationAlert" class="position-absolute top-50 start-50 translate-middle alert alert-warning d-flex flex-column align-items-center customWidth" role="alert">
     <i class="bi bi-exclamation-triangle-fill flex-shrink-0 fs-3"></i>
     <div class="mb-3">
       Estas seguro?
     </div>
-    <div class="">
+    <div class="d-flex justify-content-center">
         <button class="col mx-1 btn btn-secondary" (click)="cancel()">Cancelar</button>
-        <button class="col mx-1 btn btn-success" (click)="confirm()">Borrar</button>
+        <button class="col mx-1 btn btn-success" (click)="confirm()">Aceptar</button>
     </div>
 </div>

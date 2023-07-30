@@ -34,6 +34,9 @@ export class HomeComponent  {
   showError: boolean = false;
   errorMsg: string = '';
 
+  //***** Confirmation Alert *******
+  showConfirmationAlert: boolean = false;
+
   constructor(private authService: AuthService, 
               private router: Router,
               private userService: UserService,
@@ -61,20 +64,47 @@ export class HomeComponent  {
   } 
 
   resetMonth() {
-    this.paymentService.resetMonth(this.username)
-          .subscribe({
-            next: (resp: ApiResponse)=> {
-              const updatedUser = this.userService.loggedUser;
-              updatedUser.payments.forEach((p)=> {
-                p.alreadyPaid = false;
-                p.payDate = null;
-              });
-              this.userService.setLoggedUser(updatedUser);
-            },
-            error: (error)=> {
-              console.error(error);
-            }
+    this.showConfirmationAlert = true;
+
+    // this.paymentService.resetMonth(this.username)
+    //       .subscribe({
+    //         next: (resp: ApiResponse)=> {
+    //           const updatedUser = this.userService.loggedUser;
+    //           updatedUser.payments.forEach((p)=> {
+    //             p.alreadyPaid = false;
+    //             p.payDate = null;
+    //           });
+    //           this.userService.setLoggedUser(updatedUser);
+    //         },
+    //         error: (error)=> {
+    //           console.error(error);
+    //         }
+    //       });
+  }
+
+  cancel(cancel: boolean) {
+    this.showConfirmationAlert = cancel;
+  }
+
+  confirmReset(confirmation: boolean) {
+    if (confirmation) {
+      this.paymentService.resetMonth(this.username)
+      .subscribe({
+        next: (resp: ApiResponse)=> {
+          const updatedUser = this.userService.loggedUser;
+          updatedUser.payments.forEach((p)=> {
+            p.alreadyPaid = false;
+            p.payDate = null;
           });
+          this.userService.setLoggedUser(updatedUser);
+          this.showConfirmationAlert = false;
+        },
+        error: (error)=> {
+          console.error(error);
+        }
+      });
+      
+    }
   }
   
   print() {
@@ -221,4 +251,5 @@ export class HomeComponent  {
     const user = new PersonResponse(this.username, newPaymentsArray);
     this.userService.setLoggedUser(user);
   }
+
 }
