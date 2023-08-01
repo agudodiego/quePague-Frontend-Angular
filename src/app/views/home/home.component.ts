@@ -231,7 +231,6 @@ export class HomeComponent  {
   localArrayUpdate(resp: ApiResponse) {
     const updatedPayment = resp.data as Payment;
     const newPaymentsArray = this.userService.loggedUser.payments.map((p)=> p.paymentId === updatedPayment.paymentId ? updatedPayment : p);
-    console.log(newPaymentsArray)
     const user = new PersonResponse(this.username, newPaymentsArray);
     this.userService.setLoggedUser(user);
   }
