@@ -41,6 +41,7 @@ export class UserService {
   }
 
   get loggedUser() {
+    this._loggedUser.payments.sort((a, b) => a.paymentId- b.paymentId);
     return this._loggedUser;
   }
 

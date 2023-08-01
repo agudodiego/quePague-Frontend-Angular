@@ -65,21 +65,6 @@ export class HomeComponent  {
 
   resetMonth() {
     this.showConfirmationAlert = true;
-
-    // this.paymentService.resetMonth(this.username)
-    //       .subscribe({
-    //         next: (resp: ApiResponse)=> {
-    //           const updatedUser = this.userService.loggedUser;
-    //           updatedUser.payments.forEach((p)=> {
-    //             p.alreadyPaid = false;
-    //             p.payDate = null;
-    //           });
-    //           this.userService.setLoggedUser(updatedUser);
-    //         },
-    //         error: (error)=> {
-    //           console.error(error);
-    //         }
-    //       });
   }
 
   cancel(cancel: boolean) {
@@ -108,8 +93,6 @@ export class HomeComponent  {
   }
   
   print() {
-    console.log('imprimir listado de pagos');
-    console.log('todavia no implementado');
 
     const pdfDefinition: any = {
       content: this.paymentsListMaker(),
@@ -248,6 +231,7 @@ export class HomeComponent  {
   localArrayUpdate(resp: ApiResponse) {
     const updatedPayment = resp.data as Payment;
     const newPaymentsArray = this.userService.loggedUser.payments.map((p)=> p.paymentId === updatedPayment.paymentId ? updatedPayment : p);
+    console.log(newPaymentsArray)
     const user = new PersonResponse(this.username, newPaymentsArray);
     this.userService.setLoggedUser(user);
   }
