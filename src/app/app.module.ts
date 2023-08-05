@@ -21,6 +21,7 @@ import { ListComponent } from './views/list/list.component';
 import { ErrorAlertComponent } from './components/alerts/error-alert/error-alert.component';
 import { SuccessAlertComponent } from './components/alerts/success-alert/success-alert.component';
 import { ConfirmationAlertComponent } from './components/alerts/confirmation-alert/confirmation-alert.component';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 registerLocaleData(localeEs, 'es');
 
@@ -45,7 +46,8 @@ registerLocaleData(localeEs, 'es');
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ],
   providers: [
     {

@@ -34,6 +34,10 @@ export class HomeComponent  {
   showError: boolean = false;
   errorMsg: string = '';
 
+  //***** Pagination *******
+  public page!: number;
+  public perPage!: number;
+
   //***** Confirmation Alert *******
   showConfirmationAlert: boolean = false;
 
@@ -56,7 +60,9 @@ export class HomeComponent  {
       error: (error)=> {
         console.error(error);
       }
-    });    
+    });  
+    
+    window.innerWidth < 768 ? this.perPage=5 : this.perPage=7 ;
   }
 
   get loggedUser() {

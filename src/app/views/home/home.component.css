@@ -18,6 +18,20 @@
     opacity: 0.5;
 }
 
-/* .m {
-    background-color: #555;
-} */
+.my-pagination{
+    text-align: center;
+    width: 100%;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .pagination-previous::before {
+    padding-left: 0 !important;
+}
+
+.my-pagination ::ng-deep .ngx-pagination .current {
+    background: var(--color-3);
+}
+
+.my-pagination ::ng-deep .ngx-pagination li {
+    color: whitesmoke;
+    border-radius: 50%;
+}
