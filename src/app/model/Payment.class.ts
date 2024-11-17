@@ -5,6 +5,7 @@ export class Payment {
                  public title: string,
                  public payDate: string | null,
                  public alreadyPaid: boolean,
+                 public isPayMonth: number,
                  public note: string) {
     }
 }

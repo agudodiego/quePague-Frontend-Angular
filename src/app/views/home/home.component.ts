@@ -29,6 +29,7 @@ export class HomeComponent  {
   //***** Modal *******
   public formTitle?: string;
   public formPayed?: boolean;
+  public formMesDePago?: number;
   public formNote?: string;
 
   showError: boolean = false;
@@ -138,6 +139,7 @@ export class HomeComponent  {
     this.paymentToModify = payment;
     this.formPayed = payment.alreadyPaid;
     this.formTitle = payment.title;
+    this.formMesDePago = payment.isPayMonth;
     this.formNote = payment.note;
   }
 
@@ -153,6 +155,7 @@ export class HomeComponent  {
       this.formTitle!,
       this.formatDate(this.paymentToModify!.payDate),
       this.formPayed!,
+      this.formMesDePago!,
       this.formNote!
     );
     
@@ -233,6 +236,23 @@ export class HomeComponent  {
     const newPaymentsArray = this.userService.loggedUser.payments.map((p)=> p.paymentId === updatedPayment.paymentId ? updatedPayment : p);
     const user = new PersonResponse(this.username, newPaymentsArray);
     this.userService.setLoggedUser(user);
+  }
+
+  esCardOpaca(isAlreadyPayed: Boolean, mes: number) {
+
+    const mesEnCurso = this.actualMonth.getMonth() + 1;
+
+    if (mes == 0){
+      if (isAlreadyPayed) return true;
+      return false;
+    }
+
+    if (mesEnCurso == mes){
+      if (isAlreadyPayed) return true;
+      return false;
+    }
+
+    return true;    
   }
 
 }
