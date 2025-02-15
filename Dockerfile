@@ -1,5 +1,5 @@
 # Usa una imagen base de Node.js para construir la aplicación Angular
-FROM node:lts-gallium AS build
+FROM node:lts AS build
 
 WORKDIR /app
 
@@ -10,7 +10,8 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build --prod
+# RUN npm run build --prod
+RUN npm run build --configuration=production
 
 # Usa una imagen de Nginx para servir la aplicación
 FROM nginx:alpine
