@@ -1,27 +1,34 @@
-# QuePagueAngular
+# QUEPAGUE APP
+![quePague1](./src/assets/quepague.jpg)  
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.1.
+**quePague** es una SPA para gestionar gastos fijos mensuales.  
+**quePague** consta de dos pantallas, una para loguearse y un dashboard para realizar toda la gestión de los pagos.  
+En esta última pantalla se pueden:
+1. Agregar pagos.
+2. Marcarlos como pagados (click boton $).
+3. Editar el nombre del pago y/o la fecha en el que se realizó (click boton edicion).
+4. Marcar pago como "anual" indicando el mes de pago para que este habilitado.
+5. Agregar notas.
+6. Borrado del pago (click boton borrar).
+7. Generacion de archivo pdf con el estado de los pagos agendados.
 
-## Development server
+La idea de la app es que los gastos permanezcan cada mes para realizar un seguimiento de los mismos, pudiendo también en cada comienzo de mes poder resetear, de forma general, la condicion de cada pago a cero.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+La aplicación la realicé para uso personal al mismo tiempo que fué una excusa para seguir aprendiendo distintas tecnologías.
 
-## Code scaffolding
+  🧰 🛠️ quePagué (Backend) fue desarrollado con:
+- Intellij IDEA
+- Springboot 3.0.6
+- Spring Validation
+- Lombok
+- Spring Security 6.0.2
+- JWT (Json Web Token)
+- JPA/Hibernate
+- MySQL
+ 
+ 🧰 🛠️ quePagué (Frontend) fue desarrollado con:
+- Visual studio code
+- Angular 14
+- Bootstrap 5
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Para tener este proyecto en tu 💻, simplemente tenés que clonarlo (o bajarlo en formato .zip) y listo!! 😊
