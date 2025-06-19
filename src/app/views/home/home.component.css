@@ -17,6 +17,10 @@
 .opacity {
     opacity: 0.5;
 }
+.payment-card-opacity {
+    background-color: #164B6080;
+    border: solid 2px #4FC0D080;
+}
 
 /* .m {
     background-color: #555;

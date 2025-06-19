@@ -33,13 +33,13 @@
     <!-- listado de pagos -->
     <ng-template #paymentList>
         <div *ngFor="let payment of loggedUser.payments" class="container my-2" >
-            <div [ngClass]="{'opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}" class="row d-flex p-1 align-items-center payment-card">
+            <div [ngClass]="{'payment-card-opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}" class="row d-flex p-1 align-items-center payment-card">
 
-                <div class="col">
+                <div [ngClass]="{'opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}" class="col">
                     <h3 class="m-0">{{payment.title}}</h3>
                     <p class="m-0 mx-3">{{payment.payDate ? payment.payDate : ""}}</p>
                 </div>
-                <i class="col-2 text-end p-0 bi bi-currency-dollar"
+                <i [ngClass]="{'opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}" class="col-2 text-end p-0 bi bi-currency-dollar"
                     style="font-size: 2.1rem; color: green;"
                     (click)="pay(payment.paymentId, payment.alreadyPaid)">
                 </i>
