@@ -19,19 +19,19 @@ export class UserService {
 
   constructor(private authService: AuthService, private http: HttpClient) { }
 
-  getUser (username: string) {
+  getUser(username: string) {
     return this.http.get<ApiResponse>(`${BASE_URL}/person/${username}`)
       .pipe(catchError(handlerException));
   }
 
-  getUsersList () {
+  getUsersList() {
     return this.http.get<ApiResponse>(`${BASE_URL}/admin`)
       .pipe(catchError(handlerException));
   }
 
   deleteUser(username: string) {
     return this.http.delete<ApiResponse>(`${BASE_URL}/admin/${username}`)
-    .pipe(catchError(handlerException));
+      .pipe(catchError(handlerException));
   }
 
   //**** Methods on the logged user ************************************
@@ -40,8 +40,23 @@ export class UserService {
     this._loggedUser = user;
   }
 
-  get loggedUser() {
-    this._loggedUser.payments.sort((a, b) => a.paymentId- b.paymentId);
+  // get loggedUser() {
+  //   this._loggedUser.payments.sort((a, b) => a.paymentId - b.paymentId);
+  //   return this._loggedUser;
+  // }
+
+  get loggedUser(): PersonResponse {
+    this._loggedUser?.payments?.sort((a, b) => {
+      // 1. Criterio booleano: false (0) va antes que true (1)
+      const paidDiff = Number(a.alreadyPaid) - Number(b.alreadyPaid);
+      if (paidDiff !== 0) {
+        return paidDiff;
+      }
+
+      // 2. Desempate: paymentId ascendente
+      return a.paymentId - b.paymentId;
+    });
+
     return this._loggedUser;
   }
 
