@@ -40,21 +40,15 @@ export class UserService {
     this._loggedUser = user;
   }
 
-  // get loggedUser() {
-  //   this._loggedUser.payments.sort((a, b) => a.paymentId - b.paymentId);
-  //   return this._loggedUser;
-  // }
-
   get loggedUser(): PersonResponse {
-    this._loggedUser?.payments?.sort((a, b) => {
-      // 1. Criterio booleano: false (0) va antes que true (1)
-      const paidDiff = Number(a.alreadyPaid) - Number(b.alreadyPaid);
-      if (paidDiff !== 0) {
-        return paidDiff;
-      }
+    const currentMonth = new Date().getMonth() + 1;
 
-      // 2. Desempate: paymentId ascendente
-      return a.paymentId - b.paymentId;
+    this._loggedUser?.payments?.sort((a, b) => {
+      const aInactive = a.alreadyPaid || (a.isPayMonth !== 0 && a.isPayMonth !== currentMonth);
+      const bInactive = b.alreadyPaid || (b.isPayMonth !== 0 && b.isPayMonth !== currentMonth);
+
+      // false (0) arriba, true (1) abajo; luego desempata por paymentId
+      return (Number(aInactive) - Number(bInactive)) || (a.paymentId - b.paymentId);
     });
 
     return this._loggedUser;

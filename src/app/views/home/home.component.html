@@ -4,47 +4,43 @@
 
     <!-- row con funcionalidades -->
     <div class="row px-3">
-        <h2 class="col text-left month my-3">            
-            <i class="bi bi-arrow-clockwise" 
-            style="font-size: 2rem; color: whitesmoke;"
-            (click)="resetMonth()">
-            </i>  
+        <h2 class="col text-left month my-3">
+            <i class="bi bi-arrow-clockwise" style="font-size: 2rem; color: whitesmoke;" (click)="resetMonth()">
+            </i>
             {{actualMonth | date: 'MMMM'}}
         </h2>
         <i class="col-2 m-0 p-0 bi bi-printer d-flex justify-content-center align-items-center"
-            style="font-size: 2rem; color: whitesmoke;"
-            (click)="print()">            
+            style="font-size: 2rem; color: whitesmoke;" (click)="print()">
         </i>
         <i *ngIf="showAdminButton"
             class="col-2 m-0 p-0 bi bi-list-check d-flex justify-content-center align-items-center"
-            style="font-size: 2rem; color: whitesmoke;"
-            (click)="goToUsersList()">
+            style="font-size: 2rem; color: whitesmoke;" (click)="goToUsersList()">
         </i>
-    </div>    
+    </div>
 
     <!-- input para agregar un nuevo pago -->
     <app-payment-input></app-payment-input>
 
     <!-- spinner -->
     <div *ngIf="showLoader; else paymentList" class="spinner-border text-danger spinner" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <span class="visually-hidden">Loading...</span>
     </div>
 
     <!-- listado de pagos -->
     <ng-template #paymentList>
-        <div *ngFor="let payment of loggedUser.payments" class="container my-2" >
-            <div [ngClass]="{'payment-card-opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}" class="row d-flex p-1 align-items-center payment-card">
+        <div *ngFor="let payment of loggedUser.payments" class="container my-2">
+            <div [ngClass]="{'payment-card-opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}"
+                class="row d-flex p-1 align-items-center payment-card">
 
                 <div [ngClass]="{'opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}" class="col">
                     <h3 class="m-0">{{payment.title}}</h3>
                     <p class="m-0 mx-3">{{payment.payDate ? payment.payDate : ""}}</p>
                 </div>
-                <i [ngClass]="{'opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}" class="col-2 text-end p-0 bi bi-currency-dollar"
-                    style="font-size: 2.1rem; color: green;"
+                <i [ngClass]="{'opacity': esCardOpaca(payment.alreadyPaid, payment.isPayMonth)}"
+                    class="col-2 text-end p-0 bi bi-currency-dollar" style="font-size: 2.1rem; color: green;"
                     (click)="pay(payment.paymentId, payment.alreadyPaid)">
                 </i>
-                <i class="col-2 text-center p-0 bi bi-info-circle"
-                    style="font-size: 2.1rem; color: whitesmoke;"
+                <i class="col-2 text-center p-0 bi bi-info-circle" style="font-size: 2.1rem; color: whitesmoke;"
                     (click)="openModal(payment)">
                 </i>
 
@@ -54,57 +50,62 @@
 </div>
 
 <!-- CONFIRMATION ALERT -->
-<app-confirmation-alert [showConfirmationAlert]="showConfirmationAlert" 
-    (cancelEvent)="cancel($event)" 
+<app-confirmation-alert [showConfirmationAlert]="showConfirmationAlert" (cancelEvent)="cancel($event)"
     (confirmEvent)="confirmReset($event)">
 </app-confirmation-alert>
 
 <!-- MODAL -->
 <div class="modal my-5" id="editModal" tabindex="-1">
     <div class="modal-dialog">
-      <div class="modal-content primary border border-light">
-        <div class="modal-header bg-dark">
-          <h5 class="modal-title text-light">Modificar Pago</h5>
-        </div>
-
-        <div class="modal-body bg-dark">
-
-            <div class="mb-3 form-check">
-                <input class="form-check-input" type="checkbox" [(ngModel)]="formPayed" id="payed">
-                <label class="form-check-label text-light" for="payed">
-                    Pagado?
-                </label>
+        <div class="modal-content primary border border-light">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-light">Modificar Pago</h5>
             </div>
 
-            <div class="mb-3">
-                <label for="mesDePago" class="form-label text-light">Mes de Pago</label>
-                <div class="input-group">
-                    <input type="number" class="form-control" id="mesDePago" [(ngModel)]="formMesDePago"> 
+            <div class="modal-body bg-dark">
+
+                <div class="mb-3 form-check">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="formPayed" id="payed">
+                    <label class="form-check-label text-light" for="payed">
+                        Pagado?
+                    </label>
                 </div>
-            </div>
 
-            <div class="mb-3">
-                <label for="title" class="form-label text-light">* Nombre del Pago</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="title" [(ngModel)]="formTitle"> 
+                <div class="mb-3">
+                    <label for="mesDePago" class="form-label text-light">Mes de Pago</label>
+                    <div class="input-group">
+                        <select class="form-select" id="mesDePago" [(ngModel)]="formMesDePago">
+                            <option *ngFor="let mes of meses" [ngValue]="mes.id">
+                                {{ mes.nombre }}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="mb-3">
-                <label for="note" class="form-label text-light">Nota</label>
-                <div class="input-group">
-                    <textarea class="form-control" id="note" style="height: 100px" [(ngModel)]="formNote"></textarea>
+                <div class="mb-3">
+                    <label for="title" class="form-label text-light">* Nombre del Pago</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="title" [(ngModel)]="formTitle">
+                    </div>
                 </div>
+
+                <div class="mb-3">
+                    <label for="note" class="form-label text-light">Nota</label>
+                    <div class="input-group">
+                        <textarea class="form-control" id="note" style="height: 100px"
+                            [(ngModel)]="formNote"></textarea>
+                    </div>
+                </div>
+
             </div>
 
+            <div class="modal-footer bg-dark">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="delete()">Borrar</button>
+                <button type="button" class="btn btn-success" [disabled]="formTitle == '' || formTitle == null"
+                    (click)="editInfo()">Modificar</button>
+            </div>
         </div>
-
-        <div class="modal-footer bg-dark">
-          <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-          <button type="button" class="btn btn-danger" (click)="delete()">Borrar</button>
-          <button type="button" class="btn btn-success" [disabled]="formTitle == '' || formTitle == null" (click)="editInfo()">Modificar</button>
-        </div>
-      </div>
     </div>
-    <app-error-alert class="col-12 position-absolute" [showError]="showError" [errorMsg]="errorMsg" ></app-error-alert>
+    <app-error-alert class="col-12 position-absolute" [showError]="showError" [errorMsg]="errorMsg"></app-error-alert>
 </div>
