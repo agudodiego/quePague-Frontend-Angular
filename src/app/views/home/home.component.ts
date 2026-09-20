@@ -33,7 +33,7 @@ export class HomeComponent  {
   public formNote?: string;
 
   public meses: { id: number; nombre: string }[] = [
-    { id: 0, nombre: 'No Aplica' },
+    { id: 0, nombre: 'MENSUAL' },
     { id: 1, nombre: 'ENERO' },
     { id: 2, nombre: 'FEBRERO' },
     { id: 3, nombre: 'MARZO' },
